@@ -145,37 +145,53 @@
 	  * else return false
 	  */
 	 
-	 public boolean validateCreditCard(String card){
-		 if (card.length() < 9) return false;
-		 // if card length less than 9, return false directly
-		 int sum1 = 0, sum2 = 0, tmp = 0;
-		 String reverse = "";
-		 // get the reverse string of the card
-		 for (int i = card.length() - 1; i >= 0; i--) {
-			 if (card.charAt(i) >= '0' && card.charAt(i) <= '9') {
-				 reverse += card.charAt(i);
-			 }
-			 else {
-				 return false;
-			 }
-		 }
-				 
-		 // get the sum of the odd digits of the reverse string
-		 for (int i = 0; i < reverse.length(); i += 2) {
-			 sum1 += (reverse.charAt(i) - '0');
-		 }
-		 // get the sum of the double even digits of the reverse string
-		 for (int i = 1; i < reverse.length(); i += 2) {
-			 tmp = (reverse.charAt(i) - '0') * 2;
-			 if (tmp >= 10) {
-				 sum2 += ((tmp % 10) + (tmp / 10));
-			 }
-			 else {
-				 sum2 += tmp;
-			 }
-		 }
-		 // check whether the end digit is 0, if so return true
-		 return (sum1 + sum2) % 2 == 0;
+	 public boolean validateCreditCard(String Cardnumber){
+		 // reverse number
+        int digit;
+        int sum1 = 0;
+        int lastdigit = Cardnumber.length();
+        int count = 0;
+        // check the length
+        if (Cardnumber.length() < 9) {
+            return false;
+        }
+        // reverse the cardnumber
+        for (int i = 0; i < Cardnumber.length(); i++) {
+            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+            lastdigit--;
+            // sum the odd digits
+            if (count % 2 == 0) {
+                sum1 = sum1 + digit;
+            }
+            count++;
+        }
+        // reset the value
+        lastdigit = Cardnumber.length();
+        count = 0;
+        int sum2 = 0;
+        // reverse the cardnumber
+        for (int i = 0; i < Cardnumber.length(); i++) {
+            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+            lastdigit--;
+            // sum the even digits
+            if (count % 2 != 0) {
+                digit = digit * 2;
+                if (digit >= 10) { // greater than 9
+                    digit = (digit % 10) + ((digit - (digit % 10)) / 10); // add 2 digits
+                    sum2 = sum2 + digit;
+                } else {
+                    sum2 = sum2 + digit; // less than 10
+                }
+            }
+            count++; 
+        }
+        // check IS the sum of sum1 + sum2 ends with zero
+        if ((sum1 + sum2) % 10 == 0) {
+            return true;
+        } else if ((sum1 + sum2) % 10 != 0) {
+            return false;
+        }
+        return false;
 	 }
 	 /*
 	 * This method may be edited to achieve the task however you like.
