@@ -129,7 +129,7 @@
         }
         // check the code match or not
         try {
-            File file = new File("C:/Users/dunyu/Desktop/postal_codes (1).csv"); // file
+            File file = new File("postal_codes (1).csv"); // file
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
