@@ -1,3 +1,5 @@
+package Java;
+
  // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
 
@@ -6,11 +8,12 @@
  
  import java.io.BufferedReader;
  import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
  import java.io.FileWriter;
  import java.io.IOException;
  import java.util.ArrayList;
- import java.io.File;
- import java.io.FileReader;
+ 
  
  class CustomerSystem{
 	 
@@ -92,11 +95,15 @@
 		 System.out.println("Please input the customer postal code: ");
 		 postalCode = scanner.nextLine();
 		 // valid the postal code of the customer
-		 while (!validatePostalCode(postalCode)) {
-			 System.out.println("Your input for " + firstName + "'s postal code is not correct, please input again.");
-			 System.out.println("Please input the customer postal code: ");
-			 postalCode = scanner.nextLine();
-		 }
+		 while (validatePostalCode(postalCode)==false) {
+			System.out.println("Your input for " + firstName + "'s postal code is not correct, please input again.");
+			System.out.println("Please input the customer postal code: ");
+			postalCode = scanner.nextLine();
+			if (validatePostalCode(postalCode) == true){
+				break;
+			}
+		}
+
 		 
 		 System.out.println("Please input the customer credit card: ");
 		 creditCard = scanner.nextLine();
@@ -115,21 +122,18 @@
 
 		}
 	 /*
-     * Description: validate the Customer postal code
-     * validation rules: 1. Must be at least 3 characters in length
-     *                   2. The first 3 characters must match the postal codes loaded from the file “postal_codes.csv” 
-     * @author - Leo Shi
-     * @param - Pcode - the Customer Postal Code
-     * @return - boolean indicating is this Postal Code valid or no 
-     */
-    public static boolean validatePostalCode(String Pcode) {
+	 * This method may be edited to achieve the task however you like.
+	 * The method may not nesessarily be a void return type
+	 * This method may also be broken down further depending on your algorithm
+	 */
+	public static boolean validatePostalCode(String Pcode) {
         // check the length
         if (Pcode.length() < 3) {
             return false;
         }
         // check the code match or not
         try {
-            File file = new File("postal_codes (1).csv"); // file
+            File file = new File("C:/Users/Williamson Wang/Downloads/postal_codes (3).csv"); // file
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -147,76 +151,54 @@
         }
         return false;
     }
-	 
-	 /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
-	 /* validateCreditCard method which validate the credit card info according to the 
-	  * Lunh Algorithm.
-	  * if the credit card is conform the Lunh Algorithm, return true, 
-	  * else return false
-	  */
-	 
 	 public boolean validateCreditCard(String Cardnumber){
 		 // reverse number
-        int digit;
-        int sum1 = 0;
-        int lastdigit = Cardnumber.length();
-        int count = 0;
-        // check the length
-        if (Cardnumber.length() < 9) {
-            return false;
-        }
-        // reverse the cardnumber
-        for (int i = 0; i < Cardnumber.length(); i++) {
-            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
-            lastdigit--;
-            // sum the odd digits
-            if (count % 2 == 0) {
-                sum1 = sum1 + digit;
-            }
-            count++;
-        }
-        // reset the value
-        lastdigit = Cardnumber.length();
-        count = 0;
-        int sum2 = 0;
-        // reverse the cardnumber
-        for (int i = 0; i < Cardnumber.length(); i++) {
-            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
-            lastdigit--;
-            // sum the even digits
-            if (count % 2 != 0) {
-                digit = digit * 2;
-                if (digit >= 10) { // greater than 9
-                    digit = (digit % 10) + ((digit - (digit % 10)) / 10); // add 2 digits
-                    sum2 = sum2 + digit;
-                } else {
-                    sum2 = sum2 + digit; // less than 10
-                }
-            }
-            count++; 
-        }
-        // check IS the sum of sum1 + sum2 ends with zero
-        if ((sum1 + sum2) % 10 == 0) {
-            return true;
-        } else if ((sum1 + sum2) % 10 != 0) {
-            return false;
-        }
-        return false;
-	 }
-	 /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
-	 
-	 /*
-	  * generateCustomerDataFile method which would save all customers info 
-	  * into the specified file
-	  * */
+		 int digit;
+		 int sum1 = 0;
+		 int lastdigit = Cardnumber.length();
+		 int count = 0;
+		 // check the length
+		 if (Cardnumber.length() < 9) {
+			 return false;
+		 }
+		 // reverse the cardnumber
+		 for (int i = 0; i < Cardnumber.length(); i++) {
+			 digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+			 lastdigit--;
+			 // sum the odd digits
+			 if (count % 2 == 0) {
+				 sum1 = sum1 + digit;
+			 }
+			 count++;
+		 }
+		 // reset the value
+		 lastdigit = Cardnumber.length();
+		 count = 0;
+		 int sum2 = 0;
+		 // reverse the cardnumber
+		 for (int i = 0; i < Cardnumber.length(); i++) {
+			 digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+			 lastdigit--;
+			 // sum the even digits
+			 if (count % 2 != 0) {
+				 digit = digit * 2;
+				 if (digit >= 10) { // greater than 9
+					 digit = (digit % 10) + ((digit - (digit % 10)) / 10); // add 2 digits
+					 sum2 = sum2 + digit;
+				 } else {
+					 sum2 = sum2 + digit; // less than 10
+				 }
+			 }
+			 count++; 
+		 }
+		 // check IS the sum of sum1 + sum2 ends with zero
+		 if ((sum1 + sum2) % 10 == 0) {
+			 return true;
+		 } else if ((sum1 + sum2) % 10 != 0) {
+			 return false;
+		 }
+		 return false;}
+		 
 	 public void generateCustomerDataFile(){
 		 String filename = "customer.txt";
 		 try {
