@@ -115,24 +115,38 @@
 
 		}
 	 /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
-	 public boolean validatePostalCode(String code){
-		 // if the length of the code is less than 3, return false
-		 if (code.length() < 3) return false;
-		 String str = code.substring(0, 3);
-		 // get the first 3 characters from the code and validate it is in the postal codes stored in the system
-		 for (int i = 0; i < postalCodes.size(); i++) {
-			 // if found the substr in the postal array, return true
-			 if (postalCodes.get(i).indexOf(str) != -1) {
-				 return true;
-			 }
-		 }
-		 
-		 return false;
-	 }
+     * Description: validate the Customer postal code
+     * validation rules: 1. Must be at least 3 characters in length
+     *                   2. The first 3 characters must match the postal codes loaded from the file “postal_codes.csv” 
+     * @author - Leo Shi
+     * @param - Pcode - the Customer Postal Code
+     * @return - boolean indicating is this Postal Code valid or no 
+     */
+    public static boolean validatePostalCode(String Pcode) {
+        // check the length
+        if (Pcode.length() < 3) {
+            return false;
+        }
+        // check the code match or not
+        try {
+            File file = new File("C:/Users/dunyu/Desktop/postal_codes (1).csv"); // file
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) { // read file line by line
+                String code = line.substring(0, 3);
+                if (code.equalsIgnoreCase(Pcode)) { // match
+                    return true;
+                }
+            }
+            br.close();
+            fr.close();
+            return false;
+        } catch (Exception e) {
+            System.out.println("There is an error");
+        }
+        return false;
+    }
 	 
 	 /*
 	 * This method may be edited to achieve the task however you like.
