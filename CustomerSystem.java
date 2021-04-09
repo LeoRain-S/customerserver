@@ -192,6 +192,13 @@ package Java;
             }
             count++; 
         }
+		// check IS the sum of sum1 + sum2 ends with zero
+        if ((sum1 + sum2) % 10 == 0) {
+            return true;
+        } else if ((sum1 + sum2) % 10 != 0) {
+            return false;
+        }
+        return false;
 	}
 	 public void generateCustomerDataFile(){
 		 String filename = "customer.txt";
