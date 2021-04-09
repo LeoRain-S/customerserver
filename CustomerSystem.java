@@ -151,54 +151,47 @@ import java.io.FileReader;
         }
         return false;
     }
-	 public boolean validateCreditCard(String Cardnumber){
-		 // reverse number
-		 int digit;
-		 int sum1 = 0;
-		 int lastdigit = Cardnumber.length();
-		 int count = 0;
-		 // check the length
-		 if (Cardnumber.length() < 9) {
-			 return false;
-		 }
-		 // reverse the cardnumber
-		 for (int i = 0; i < Cardnumber.length(); i++) {
-			 digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
-			 lastdigit--;
-			 // sum the odd digits
-			 if (count % 2 == 0) {
-				 sum1 = sum1 + digit;
-			 }
-			 count++;
-		 }
-		 // reset the value
-		 lastdigit = Cardnumber.length();
-		 count = 0;
-		 int sum2 = 0;
-		 // reverse the cardnumber
-		 for (int i = 0; i < Cardnumber.length(); i++) {
-			 digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
-			 lastdigit--;
-			 // sum the even digits
-			 if (count % 2 != 0) {
-				 digit = digit * 2;
-				 if (digit >= 10) { // greater than 9
-					 digit = (digit % 10) + ((digit - (digit % 10)) / 10); // add 2 digits
-					 sum2 = sum2 + digit;
-				 } else {
-					 sum2 = sum2 + digit; // less than 10
-				 }
-			 }
-			 count++; 
-		 }
-		 // check IS the sum of sum1 + sum2 ends with zero
-		 if ((sum1 + sum2) % 10 == 0) {
-			 return true;
-		 } else if ((sum1 + sum2) % 10 != 0) {
-			 return false;
-		 }
-		 return false;}
-		 
+	 public static boolean validateCreditCard(String Cardnumber) {
+        int digit;
+        int sum1 = 0;
+        int count = 0;
+        // check the length
+        if (Cardnumber.length() < 9) {
+            return false;
+        }
+        // clear the space
+        Cardnumber = Cardnumber.replaceAll("\\s", "");
+        // reverse the cardnumber
+        int lastdigit = Cardnumber.length();
+        for (int i = 0; i < Cardnumber.length(); i++) {
+            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+            lastdigit--;
+            // sum the odd digits
+            if (count % 2 == 0) {
+                sum1 = sum1 + digit;
+            }
+            count++;
+        }
+        // reset the value
+        lastdigit = Cardnumber.length();
+        count = 0;
+        int sum2 = 0;
+        // reverse the cardnumber
+        for (int i = 0; i < Cardnumber.length(); i++) {
+            digit = Integer.parseInt(Cardnumber.substring(lastdigit - 1, lastdigit));
+            lastdigit--;
+            // sum the even digits
+            if (count % 2 != 0) {
+                digit = digit * 2;
+                if (digit >= 10) { // greater than 9
+                    digit = (digit % 10) + ((digit - (digit % 10)) / 10); // add 2 digits
+                    sum2 = sum2 + digit;
+                } else {
+                    sum2 = sum2 + digit; // less than 10
+                }
+            }
+            count++; 
+        }
 	 public void generateCustomerDataFile(){
 		 String filename = "customer.txt";
 		 try {
