@@ -122,10 +122,13 @@ import java.io.FileReader;
 
 		}
 	 /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
+     	* Description: validate the Customer postal code
+     	* validation rules: 1. Must be at least 3 characters in length
+     	*                   2. The first 3 characters must match the postal codes loaded from the file “postal_codes.csv” 
+     	* @author - Leo Shi
+     	* @param - Pcode - the Customer Postal Code
+     	* @return - boolean indicating is this Postal Code valid or no 
+     	*/
 	public static boolean validatePostalCode(String Pcode) {
         // check the length
         if (Pcode.length() < 3) {
@@ -151,7 +154,15 @@ import java.io.FileReader;
         }
         return false;
     }
-	 public static boolean validateCreditCard(String Cardnumber) {
+	/*
+     	* Description: validate the Customer Credit Card number
+     	* validation rules: 1.	Must be at least 9 digits in length
+     	*                   2.	The digits must pass the Luhn algorithm.
+     	* @author - Leo Shi
+     	* @param - Pcode - the Customer Credit Card number
+     	* @return - boolean indicating is this Credit Card number valid or no 
+     	*/
+	public static boolean validateCreditCard(String Cardnumber) {
         int digit;
         int sum1 = 0;
         int count = 0;
