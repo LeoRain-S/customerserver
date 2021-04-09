@@ -1,19 +1,13 @@
 package Java;
-
- // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
-
-
  import java.util.Scanner;
  // More packages may be imported in the space below
- 
  import java.io.BufferedReader;
  import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
+ import java.io.File;
+ import java.io.FileReader;
  import java.io.FileWriter;
  import java.io.IOException;
  import java.util.ArrayList;
- 
  
  class CustomerSystem{
 	 
