@@ -192,6 +192,7 @@ package Java;
             }
             count++; 
         }
+	}
 	 public void generateCustomerDataFile(){
 		 String filename = "customer.txt";
 		 try {
