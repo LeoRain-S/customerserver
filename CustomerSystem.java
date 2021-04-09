@@ -70,11 +70,6 @@ import java.io.FileReader;
 		 );
 	 }
 	 /*
-	 * This method may be edited to achieve the task however you like.
-	 * The method may not nesessarily be a void return type
-	 * This method may also be broken down further depending on your algorithm
-	 */
-	 /*
 	  * enterCustomerInfo method
 	  * which would prompt the user type detailed info of the customer,
 	  * and then valid the postal code and crredit card of the customer, 
